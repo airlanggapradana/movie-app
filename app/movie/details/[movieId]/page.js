@@ -1,5 +1,5 @@
 "use client";
-import { getMovieDetail } from "@/api";
+import { getMovieDetail, getMovieCast } from "@/api";
 import CardContainer from "@/components/CardContainer";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,14 +7,20 @@ import { useRouter } from "next/navigation";
 export default function MovieDetails({ params }) {
   const router = useRouter();
   const [getDetail, setGetDetail] = useState([]);
+  const [getCast, setGetCast] = useState({});
 
   useEffect(() => {
     getMovieDetail(params.movieId).then((hasil) => {
       setGetDetail(hasil);
     });
+
+    getMovieCast(params.movieId).then((result) => {
+      setGetCast(result);
+    });
   }, []);
 
-  //   console.log({ detailFilm: getDetail });
+  // console.log({ detailFilm: getDetail });
+  // console.log(getCast.cast);
 
   return (
     <main className="flex min-h-screen items-center justify-center">
@@ -27,7 +33,7 @@ export default function MovieDetails({ params }) {
           >
             Back
           </button>
-          <CardContainer data={getDetail} />
+          <CardContainer data={getDetail} casts={getCast.cast} />
         </div>
       </section>
     </main>

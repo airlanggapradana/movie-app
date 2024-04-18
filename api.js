@@ -20,3 +20,10 @@ export const getMovieDetail = async (id) => {
   );
   return detail.data;
 };
+
+export const getMovieCast = async (id) => {
+  const cast = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASEURL}/movie/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
+  return cast.data;
+};
