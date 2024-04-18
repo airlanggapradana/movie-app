@@ -76,10 +76,11 @@ const CardContainer = ({ data, casts }) => {
           </div>
         </div>
 
-        <div className="w-full max-h-[21rem] p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
+        <div className="w-full max-h-[22rem] p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
+          <h1 className="font-bold text-2xl text-neutral-500 mb-3">Casts</h1>
           {/* pp cast */}
 
-          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-center gap-5">
+          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-center gap-5 pb-9">
             {casts &&
               Array.isArray(casts) &&
               casts

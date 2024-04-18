@@ -3,6 +3,7 @@ import { getMovieDetail, getMovieCast } from "@/api";
 import CardContainer from "@/components/CardContainer";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { RiArrowLeftLine } from "@remixicon/react";
 
 export default function MovieDetails({ params }) {
   const router = useRouter();
@@ -29,9 +30,9 @@ export default function MovieDetails({ params }) {
           <button
             type="button"
             onClick={(e) => router.back()}
-            className="w-24 h-12 border-2 rounded-lg mb-5"
+            className="w-16 h-16 border-2 rounded-lg mb-5 flex items-center justify-center"
           >
-            Back
+            <RiArrowLeftLine size={30} className="fill-neutral-500" />
           </button>
           <CardContainer data={getDetail} casts={getCast.cast} />
         </div>

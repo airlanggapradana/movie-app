@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@remixicon/react": "^4.2.0",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
