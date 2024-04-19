@@ -80,13 +80,13 @@ const CardContainer = ({ data, casts }) => {
           <h1 className="font-bold text-2xl text-neutral-500 mb-3">Casts</h1>
           {/* pp cast */}
 
-          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-center gap-5 pb-9">
+          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-between gap-5 pb-9">
             {casts &&
               Array.isArray(casts) &&
               casts
                 .filter((cast, index) => index <= 9)
                 .map((cast) => (
-                  <div className="max-w-[12rem]">
+                  <div className="w-[9rem]">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${cast.profile_path}`}
                       width={128}

@@ -64,9 +64,13 @@ const MovieCard = ({ movie }) => {
         className="h-[400px] object-cover object-center rounded-lg drop-shadow-md"
       />
       <div className="space-y-2 mt-3">
-        <h1>{movie.title}</h1>
-        <h1>{movie.release_date}</h1>
-        <h1>{movie.vote_average}</h1>
+        <h1 className="font-bold text-lg text-neutral-700">{movie.title}</h1>
+        <h2 className="font-semibold text-base text-neutral-500">
+          {movie.release_date}
+        </h2>
+        <p className="font-medium text-base text-neutral-400">
+          {movie.vote_average}
+        </p>
       </div>
     </div>
   );

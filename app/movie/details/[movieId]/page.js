@@ -30,9 +30,9 @@ export default function MovieDetails({ params }) {
           <button
             type="button"
             onClick={(e) => router.back()}
-            className="w-16 h-16 border-2 rounded-lg mb-5 flex items-center justify-center"
+            className="w-14 h-14 border-2 rounded-lg mb-5 flex items-center justify-center"
           >
-            <RiArrowLeftLine size={30} className="fill-neutral-500" />
+            <RiArrowLeftLine size={25} className="fill-neutral-500" />
           </button>
           <CardContainer data={getDetail} casts={getCast.cast} />
         </div>
