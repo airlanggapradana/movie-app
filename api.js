@@ -27,3 +27,19 @@ export const getMovieCast = async (id) => {
   );
   return cast.data;
 };
+
+// TV Series
+
+export const getTVSeries = async () => {
+  const series = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASEURL}/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
+  return series.data.results;
+};
+
+export const getTVDetails = async (seriesId) => {
+  const tvDetail = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASEURL}/tv/${seriesId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=credits`
+  );
+  return tvDetail.data;
+};

@@ -1,17 +1,24 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { getMovieList, searchMovie } from "@/api";
+import { getMovieList, searchMovie, getTVSeries } from "@/api";
 import Link from "next/link";
 
 const Hero = () => {
   const [PopularMovie, setPopularMovie] = useState([]);
+  const [TVSeries, setTVSeries] = useState([]);
 
   useEffect(() => {
     getMovieList().then((result) => {
       setPopularMovie(result);
     });
+
+    getTVSeries().then((hasil) => {
+      setTVSeries(hasil);
+    });
   }, []);
+
+  // console.log({ tvseries: TVSeries });
 
   const search = async (q) => {
     if (q.length > 3) {
@@ -39,13 +46,28 @@ const Hero = () => {
       </form>
 
       <div className="flex flex-wrap gap-5 justify-center md:justify-between">
-        {PopularMovie.map((movie, index) => (
+        {PopularMovie.map(
+          (movie, index) =>
+            movie.vote_average !== 0 && (
+              <Link
+                href={`/movie/details/${movie.id}`}
+                key={index}
+                className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
+              >
+                <MovieCard movie={movie} key={index} />
+              </Link>
+            )
+        )}
+      </div>
+
+      <div className="flex flex-wrap gap-5 justify-center md:justify-between">
+        {TVSeries.map((series, index) => (
           <Link
-            href={`/movie/details/${movie.id}`}
+            href={`/tv/details/${series.id}`}
             key={index}
             className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
           >
-            <MovieCard movie={movie} key={index} />
+            <MovieCard movie={series} key={index} />
           </Link>
         ))}
       </div>
@@ -64,9 +86,11 @@ const MovieCard = ({ movie }) => {
         className="h-[400px] object-cover object-center rounded-lg drop-shadow-md"
       />
       <div className="space-y-2 mt-3">
-        <h1 className="font-bold text-lg text-neutral-700">{movie.title}</h1>
+        <h1 className="font-bold text-lg text-neutral-700">
+          {movie.title || movie.name}
+        </h1>
         <h2 className="font-semibold text-base text-neutral-500">
-          {movie.release_date}
+          {movie.release_date || movie.first_air_date}
         </h2>
         <p className="font-medium text-base text-neutral-400">
           {movie.vote_average}

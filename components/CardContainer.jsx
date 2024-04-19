@@ -32,11 +32,19 @@ const CardContainer = ({ data, casts }) => {
       />
       <div className="flex flex-col items-start w-full overflow-hidden">
         <h1 className="font-bold text-4xl text-neutral-700 mb-3">
-          {data.title}
+          {data.title || data.name}
         </h1>
-        <div className="flex items-center gap-3 mb-5">
-          <li className={style.title}>{data.release_date}</li>
-          <li className={style.title}>{minutesToHours(data.runtime)}</li>
+        <div className="flex flex-col items-start md:flex-row md:items-center gap-3 mb-5">
+          <li className={style.title}>
+            {data.release_date || data.first_air_date}
+          </li>
+          {data.runtime ? (
+            <li className={style.title}>{minutesToHours(data.runtime)}</li>
+          ) : (
+            <li className={style.title}>
+              {`${minutesToHours(data.episode_run_time)} per episode`}
+            </li>
+          )}
         </div>
 
         <div className="space-y-3 mb-7">
@@ -51,20 +59,27 @@ const CardContainer = ({ data, casts }) => {
 
         <div className="w-full p-4 border-2 rounded-lg border-teal-500 mb-3">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0">
-            <div className="space-y-2 md:border-r-2 border-neutral-300">
-              <h2 className="font-semibold text-lg text-neutral-400">Budget</h2>
-              <h1 className="font-bold text-2xl text-neutral-500">
-                {addCommasToNumber(data.budget)}
-              </h1>
-            </div>
-            <div className="space-y-2 md:ml-2 md:border-r-2 border-neutral-300">
-              <h2 className="font-semibold text-lg text-neutral-400">
-                Revenue
-              </h2>
-              <h1 className="font-bold text-2xl text-neutral-500">
-                {addCommasToNumber(data.revenue)}
-              </h1>
-            </div>
+            {data.budget && (
+              <div className="space-y-2 md:border-r-2 border-neutral-300">
+                <h2 className="font-semibold text-lg text-neutral-400">
+                  Budget
+                </h2>
+                <h1 className="font-bold text-2xl text-neutral-500">
+                  {addCommasToNumber(data.budget)}
+                </h1>
+              </div>
+            )}
+
+            {data.revenue && (
+              <div className="space-y-2 md:ml-2 md:border-r-2 border-neutral-300">
+                <h2 className="font-semibold text-lg text-neutral-400">
+                  Revenue
+                </h2>
+                <h1 className="font-bold text-2xl text-neutral-500">
+                  {addCommasToNumber(data.revenue)}
+                </h1>
+              </div>
+            )}
             <div className="space-y-2 md:ml-2">
               <h2 className="font-semibold text-lg text-neutral-400">
                 Overall Rate
@@ -76,35 +91,38 @@ const CardContainer = ({ data, casts }) => {
           </div>
         </div>
 
-        <div className="w-full max-h-[22rem] p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
+        <div className="w-full max-h-[23rem] p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
           <h1 className="font-bold text-2xl text-neutral-500 mb-3">Casts</h1>
           {/* pp cast */}
 
-          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-between gap-5 pb-9">
+          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-start gap-7 pb-9">
             {casts &&
               Array.isArray(casts) &&
               casts
                 .filter((cast, index) => index <= 9)
-                .map((cast) => (
-                  <div className="w-[9rem]">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${cast.profile_path}`}
-                      width={128}
-                      height={128}
-                      alt="..."
-                      className="h-[15rem] w-full object-cover object-center rounded-lg shadow-md"
-                    />
+                .map(
+                  (cast) =>
+                    cast.profile_path !== null && (
+                      <div className="w-[9rem]">
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${cast.profile_path}`}
+                          width={128}
+                          height={128}
+                          alt="..."
+                          className="h-[15rem] w-full object-cover object-center rounded-lg shadow-md"
+                        />
 
-                    <div className="space-y-1 mt-2">
-                      <h1 className="font-medium text-base text-neutral-700">
-                        {cast.name}
-                      </h1>
-                      <h2 className="font-normal text-sm text-neutral-500">
-                        {cast.character}
-                      </h2>
-                    </div>
-                  </div>
-                ))}
+                        <div className="space-y-1 mt-2">
+                          <h1 className="font-medium text-base text-neutral-700">
+                            {cast.name}
+                          </h1>
+                          <h2 className="font-normal text-sm text-neutral-500">
+                            {cast.character}
+                          </h2>
+                        </div>
+                      </div>
+                    )
+                )}
           </div>
         </div>
       </div>
