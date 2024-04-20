@@ -7,6 +7,8 @@ import Link from "next/link";
 const Hero = () => {
   const [PopularMovie, setPopularMovie] = useState([]);
   const [TVSeries, setTVSeries] = useState([]);
+  const [MultiSearch, setMultipleSearch] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     getMovieList().then((result) => {
@@ -18,12 +20,11 @@ const Hero = () => {
     });
   }, []);
 
-  // console.log({ tvseries: TVSeries });
-
   const search = async (q) => {
     if (q.length > 3) {
+      setIsSearching(true);
       const query = await searchMovie(q);
-      setPopularMovie(query.results);
+      setMultipleSearch(query.results);
     }
   };
 
@@ -45,32 +46,73 @@ const Hero = () => {
         />
       </form>
 
-      <div className="flex flex-wrap gap-5 justify-center md:justify-between">
-        {PopularMovie.map(
-          (movie, index) =>
-            movie.vote_average !== 0 && (
+      {MultiSearch.length !== 0 && (
+        <>
+          <h1 className="font-bold text-2xl text-neutral-700">
+            Hasil Pencarian...
+          </h1>
+          <div className="flex flex-wrap gap-5 justify-center md:justify-between">
+            {MultiSearch?.map(
+              (item, index) =>
+                item.vote_average !== 0 &&
+                (item.media_type === "movie" ? (
+                  <Link
+                    href={`/movie/details/${item.id}`}
+                    key={index}
+                    className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
+                  >
+                    <MovieCard movie={item} key={index} />
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/tv/details/${item.id}`}
+                    key={index}
+                    className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
+                  >
+                    <MovieCard movie={item} key={index} />
+                  </Link>
+                ))
+            )}
+          </div>
+        </>
+      )}
+
+      {isSearching === false && (
+        <>
+          <h1 className="font-bold text-2xl text-neutral-700">
+            Popular Movies
+          </h1>
+          <div className="flex flex-wrap gap-5 justify-center md:justify-between border-b-2 pb-9 border-neutral-300">
+            {PopularMovie.map(
+              (movie, index) =>
+                movie.vote_average !== 0 && (
+                  <Link
+                    href={`/movie/details/${movie.id}`}
+                    key={index}
+                    className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
+                  >
+                    <MovieCard movie={movie} key={index} />
+                  </Link>
+                )
+            )}
+          </div>
+
+          <h1 className="font-bold text-3xl text-neutral-700">
+            Popular TV Series
+          </h1>
+          <div className="flex flex-wrap gap-5 justify-center md:justify-between">
+            {TVSeries.map((series, index) => (
               <Link
-                href={`/movie/details/${movie.id}`}
+                href={`/tv/details/${series.id}`}
                 key={index}
                 className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
               >
-                <MovieCard movie={movie} key={index} />
+                <MovieCard movie={series} key={index} />
               </Link>
-            )
-        )}
-      </div>
-
-      <div className="flex flex-wrap gap-5 justify-center md:justify-between">
-        {TVSeries.map((series, index) => (
-          <Link
-            href={`/tv/details/${series.id}`}
-            key={index}
-            className="min-h-full hover:scale-105 transition-all duration-200 ease-out"
-          >
-            <MovieCard movie={series} key={index} />
-          </Link>
-        ))}
-      </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

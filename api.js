@@ -9,7 +9,7 @@ export const getMovieList = async () => {
 
 export const searchMovie = async (q) => {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASEURL}/search/movie?query=${q}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    `${process.env.NEXT_PUBLIC_BASEURL}/search/multi?query=${q}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
   );
   return res.data;
 };
