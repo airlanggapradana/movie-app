@@ -6,7 +6,7 @@ import CardContainer from "@/components/CardContainer";
 import { RiArrowLeftLine } from "@remixicon/react";
 import { useRouter } from "next/navigation";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const [getTVDetail, setTVDetail] = useState([]);
   const seriesCredits = getTVDetail.credits;
   const router = useRouter();
