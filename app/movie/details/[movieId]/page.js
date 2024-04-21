@@ -18,7 +18,7 @@ export default function MovieDetails({ params }) {
     getMovieCast(params.movieId).then((result) => {
       setGetCast(result);
     });
-  }, []);
+  }, [params.movieId]);
 
   // console.log({ detailFilm: getDetail });
   // console.log(getCast.cast);

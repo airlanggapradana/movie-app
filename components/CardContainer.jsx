@@ -104,7 +104,7 @@ const CardContainer = ({ data, casts }) => {
                 .map(
                   (cast) =>
                     cast.profile_path !== null && (
-                      <div className="min-w-[9rem]">
+                      <div className="min-w-[9rem]" key={cast.id}>
                         <Image
                           src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${cast.profile_path}`}
                           width={128}

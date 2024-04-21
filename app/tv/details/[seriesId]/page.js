@@ -15,7 +15,7 @@ export default function page({ params }) {
     getTVDetails(params.seriesId).then((hasil) => {
       setTVDetail(hasil);
     });
-  }, []);
+  }, [params.seriesId]);
 
   // console.log({ details: getTVDetail });
 
