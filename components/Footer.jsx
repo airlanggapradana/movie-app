@@ -31,7 +31,7 @@ const Footer = () => {
           </h1>
 
           <h3 className="font-normal text-sm text-neutral-400 text-center mb-4">
-            Follow me on social media!
+            Find me on social media!
           </h3>
 
           <div className="max-w-xl mx-auto">

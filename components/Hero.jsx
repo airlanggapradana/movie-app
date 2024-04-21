@@ -30,10 +30,12 @@ const Hero = () => {
 
   return (
     <div className="space-y-5">
-      <div className="text-center space-y-2">
-        <h1 className="font-bold text-4xl text-neutral-700">Movie App</h1>
+      <div className="text-center space-y-4">
+        <h1 className="font-bold text-4xl text-neutral-700">
+          Search Movie App
+        </h1>
         <p className="font-medium text-lg text-neutral-500">
-          Created using Nextjs14
+          Made by using Nextjs14, TailwindCSS, The Movie Database API
         </p>
       </div>
 
@@ -51,7 +53,7 @@ const Hero = () => {
           <h1 className="font-bold text-2xl text-neutral-700">
             Hasil Pencarian...
           </h1>
-          <div className="flex flex-wrap gap-5 justify-center md:justify-between">
+          <div className="grid grid-cols-1 justify-items-center sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {MultiSearch?.map(
               (item, index) =>
                 item.vote_average !== 0 &&
@@ -79,10 +81,10 @@ const Hero = () => {
 
       {isSearching === false && (
         <>
-          <h1 className="font-bold text-2xl text-neutral-700">
+          <h1 className="font-bold text-3xl text-center md:text-start text-neutral-700">
             Popular Movies
           </h1>
-          <div className="flex flex-wrap gap-5 justify-center md:justify-between border-b-2 pb-9 border-neutral-300">
+          <div className="grid grid-cols-1 justify-items-center sm:grid-cols-2 lg:grid-cols-4 gap-5 border-b-2 pb-9 border-cyan-500">
             {PopularMovie.map(
               (movie, index) =>
                 movie.vote_average !== 0 && (
@@ -97,10 +99,10 @@ const Hero = () => {
             )}
           </div>
 
-          <h1 className="font-bold text-3xl text-neutral-700">
+          <h1 className="font-bold text-3xl text-center md:text-start text-neutral-700">
             Popular TV Series
           </h1>
-          <div className="flex flex-wrap gap-5 justify-center md:justify-between">
+          <div className="grid grid-cols-1 justify-items-center sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {TVSeries.map((series, index) => (
               <Link
                 href={`/tv/details/${series.id}`}

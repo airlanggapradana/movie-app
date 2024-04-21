@@ -22,7 +22,7 @@ const CardContainer = ({ data, casts }) => {
   }
 
   return (
-    <div className="w-full flex flex-col md:flex-row gap-5 border-2 rounded-xl p-4 border-neutral-500">
+    <div className="w-full flex flex-col lg:flex-row gap-5 border-2 rounded-xl p-4 border-cyan-600">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${data.poster_path}`}
         width={500}
@@ -34,7 +34,7 @@ const CardContainer = ({ data, casts }) => {
         <h1 className="font-bold text-4xl text-neutral-700 mb-3">
           {data.title || data.name}
         </h1>
-        <div className="flex flex-col items-start md:flex-row md:items-center gap-3 mb-5">
+        <div className="flex flex-col items-start lg:flex-row lg:items-center gap-3 mb-5">
           <li className={style.title}>
             {data.release_date || data.first_air_date}
           </li>
@@ -91,19 +91,20 @@ const CardContainer = ({ data, casts }) => {
           </div>
         </div>
 
-        <div className="w-full max-h-[23rem] p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
+        {/* Casts CARD */}
+        <div className="w-full p-4 overflow-hidden border-2 border-teal-500 rounded-lg">
           <h1 className="font-bold text-2xl text-neutral-500 mb-3">Casts</h1>
           {/* pp cast */}
 
-          <div className="w-full h-full overflow-auto flex flex-wrap items-start justify-start gap-7 pb-9">
+          <div className="max-w-screen-xl overflow-auto flex items-start justify-start gap-7 pb-4">
             {casts &&
               Array.isArray(casts) &&
               casts
-                .filter((cast, index) => index <= 9)
+                .filter((cast, index) => index <= 12)
                 .map(
                   (cast) =>
                     cast.profile_path !== null && (
-                      <div className="w-[9rem]">
+                      <div className="min-w-[9rem]">
                         <Image
                           src={`${process.env.NEXT_PUBLIC_BASEIMGURL}/${cast.profile_path}`}
                           width={128}
