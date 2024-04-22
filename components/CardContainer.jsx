@@ -59,7 +59,7 @@ const CardContainer = ({ data, casts }) => {
 
         <div className="w-full p-4 border-2 rounded-lg border-teal-500 mb-3">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0">
-            {data.budget && (
+            {data.budget !== 0 && (
               <div className="space-y-2 md:border-r-2 border-neutral-300">
                 <h2 className="font-semibold text-lg text-neutral-400">
                   Budget
@@ -70,7 +70,7 @@ const CardContainer = ({ data, casts }) => {
               </div>
             )}
 
-            {data.revenue && (
+            {data.revenue !== 0 && (
               <div className="space-y-2 md:ml-2 md:border-r-2 border-neutral-300">
                 <h2 className="font-semibold text-lg text-neutral-400">
                   Revenue
